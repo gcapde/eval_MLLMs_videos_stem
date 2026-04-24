@@ -1,0 +1,181 @@
+task_metrics = [
+    "comunication",
+    "project_quality",
+    "participation_colaboration",
+]
+
+[genai.text]
+model_id = "gemini-2.5-pro"
+safety_settings = [
+    ["HARM_CATEGORY_HATE_SPEECH", "OFF"],                       
+    ["HARM_CATEGORY_DANGEROUS_CONTENT", "OFF"],
+    ["HARM_CATEGORY_SEXUALLY_EXPLICIT", "OFF"],
+    ["HARM_CATEGORY_HARASSMENT", "OFF"]
+]
+model_parameters = {"temperature" = 0.0, "top_p" = 0.95}
+prompt = """# Text Evaluation
+You are an expert in evaluating student texts. Your task is to analyze the
+provided text and generate a JSON output containing Metrics.
+
+The texts are transcripts from videos where groups of students in primary school and early secondary school (ages 8 to 15) present themselves and describe how they addressed two creative challenges using Minecraft Education.
+
+The expected task involves collaborative work in a shared Minecraft world divided into two construction areas, each representing a different historical moment. One area should represent the Palacio Legislativo of Uruguay in 2024, focusing on key features such as the facade, the Salón de los Pasos Perdidos, and the Cámara de Representantes. The other area should recreate the Peñarol neighborhood in Montevideo as it was in 1930, based on references from specific book chapters, including elements like water supply and drainage systems.
+
+Creativity, attention to technical detail, and the mention of communication elements (such as signs, blackboards, or characters with dialogues created in the Minecraft world) are encouraged. Your evaluation should assess how well these objectives are communicated in the transcript. You may infer certain aspects when they are suggested clearly, especially considering the students' age, but avoid assuming elements are present unless there is sufficient indication in the text.
+
+## Detailed Instructions
+**Text Input:** You will receive a text as input.
+### Metrics:
+Each metric should return a value of the type specified in the metric definition following the
+instructions below.
+
+{metrics}
+
+### Output Format:
+The output should be a single JSON object with the metric ids and values as a dictionary like
+following generic example:
+```json
+{{
+    "metric_id_1": "metric_value_1",
+    "metric_id_2": "metric_value_2",
+    "metric_id_3": "metric_value_3",
+    ...
+    "metric_id_n": "metric_value_n"
+}}
+```
+Remember to always write all the text values in Spanish only.
+
+Take into account that the texts are transcripts from students in the primary school and early secondary school (ages 8 to 15), so you should consider that when scoring the text and the metrics.
+Your explanations for the scoring should consider the level of a child. This doesn't mean to be condescending.
+Try to use the full range of the scores from its minimum to its maximum.
+Try to be as specific as possible in your explanations, so the evaluator can understand and see the specific aspects
+of their texts. Avoid generic comments like "it was a good job" or "Its less than expected". Instead, focus on the details of the students performance and how they can improve.
+This devolution is meant to be used by the teachers. Talk about the students in the third person.
+"""
+
+
+[genai.audio]
+model_id = "gemini-2.5-pro"
+safety_settings = [
+    ["HARM_CATEGORY_HATE_SPEECH", "OFF"],
+    ["HARM_CATEGORY_DANGEROUS_CONTENT", "OFF"],
+    ["HARM_CATEGORY_SEXUALLY_EXPLICIT", "OFF"],
+    ["HARM_CATEGORY_HARASSMENT", "OFF"]
+]
+model_parameters = {"temperature" = 0.0, "top_p" = 0.95}
+prompt = """# Audio Evaluation
+You are an expert in evaluating student audios. Your task is to analyze the
+provided audio and generate a JSON output containing Metrics.
+
+The audios are recordings of students in primary school and early secondary school (ages 8 to 15) working in groups. In these recordings, students present themselves and describe how they addressed two creative challenges using Minecraft Education.
+
+The expected task involves collaborative work in a shared Minecraft world divided into two construction areas, each representing a different historical moment. One area should represent the Palacio Legislativo of Uruguay in 2024, focusing on key features such as the facade, the Salón de los Pasos Perdidos, and the Cámara de Representantes. The other area should recreate the Peñarol neighborhood in Montevideo as it was in 1930, based on references from specific book chapters, including elements like water supply and drainage systems.
+
+Creativity, attention to technical detail, and the mention of communication elements (such as signs, blackboards, or characters with dialogues created in the Minecraft world) are encouraged. Your evaluation should assess how well these objectives are communicated in the audio. You may infer certain aspects when they are suggested clearly, especially considering the students' age, but avoid assuming elements are present unless there is sufficient indication in the students' speech.
+
+## Detailed Instructions
+**Audio Input:** You will receive an audio as input.
+### Metrics:
+Each metric should return a value of the type specified in the metric definition following the
+instructions below.
+
+{metrics}
+
+### Output Format:
+The output should be a single JSON object with the metric ids and values as a dictionary like
+following generic example:
+```json
+{{
+    "metric_id_1": "metric_value_1",
+    "metric_id_2": "metric_value_2",
+    "metric_id_3": "metric_value_3",
+    ...
+    "metric_id_n": "metric_value_n"
+}}
+```
+Remember to always write all the text values in Spanish only.
+
+
+Take into account that the audios are records from students in the primary school and early secondary school (ages 8 to 15), so you should consider that when scoring the audios and the metrics.
+Your explanations for the scoring should consider the level of a child. This doesn't mean to be condescending.
+Try to use the full range of the scores from its minimum to its maximum.
+Try to be as specific as possible in your explanations, so the evaluator can understand and see the specific aspects
+of their audios. Avoid generic comments like "it was a good job" or "Its less than expected". Instead, focus on the details of the students performance and how they can improve.
+This devolution is meant to be used by the teachers. Talk about the students in the third person.
+Focus your evaluation on the content, the student's performance and the way they express their ideas and the technical aspects of the audio but don't be too harsh on the technical aspects.
+"""
+
+[genai.video]
+model_id = "gemini-2.5-pro"
+model_parameters = {"temperature" = 0.0, "top_p" = 0.95}
+safety_settings = [
+    ["HARM_CATEGORY_HATE_SPEECH", "OFF"],
+    ["HARM_CATEGORY_DANGEROUS_CONTENT", "OFF"],
+    ["HARM_CATEGORY_SEXUALLY_EXPLICIT", "OFF"],
+    ["HARM_CATEGORY_HARASSMENT", "OFF"]
+]
+prompt = """# Video Evaluation
+
+You are an expert in evaluating student videos. Your task is to analyze the provided video and generate a JSON output containing Metrics.
+
+The videos are created by groups of students in primary school and early secondary school (ages 8 to 15). In these videos, the students introduce themselves as a team and explain how they addressed two creative challenges using Minecraft Education.
+
+The expected task involves collaborative work in a shared Minecraft world divided into two construction areas, each representing a different historical moment. One area should represent the Palacio Legislativo of Uruguay in 2024, focusing on key features such as the facade, the Salón de los Pasos Perdidos, and the Cámara de Representantes. The other area should recreate the Peñarol neighborhood in Montevideo as it was in 1930, based on references from specific book chapters, including elements like water supply and drainage systems.
+
+Creativity, attention to technical detail, teamwork, and the use of communication elements (such as signs, blackboards, or characters with dialogues created in the Minecraft world) are encouraged. Your evaluation should assess how well these objectives are demonstrated in the video, considering what is both shown and said.
+
+## Detailed Instructions
+
+**Video Input:** You will receive a video as input.
+
+### Metrics:
+Each metric should return a value of the type specified in the metric definition following the
+instructions below.
+
+{metrics}
+
+### Output Format:
+The output should be a single JSON object with the metric ids and values as a dictionary like
+following generic example:
+```json
+{{
+    "metric_id_1": "metric_value_1",
+    "metric_id_2": "metric_value_2",
+    "metric_id_3": "metric_value_3",
+    ...
+    "metric_id_n": "metric_value_n"
+}}
+```
+
+Video Evaluation Guidelines for Minecraft Challenge
+
+When evaluating these videos, remember that they are created by children as part of a collaborative educational project. Consider their age and experience when scoring each aspect (ages 8 to 15).
+
+Instructions for Evaluators:
+
+1. Level-Appropriate Scoring: Base your scores and comments on what is reasonably expected from children of this age group (ages 8 to 15). Avoid holding them to professional standards.
+
+2. Framing and Orientation:  Some videos may be recorded vertically, while others may be horizontal. This is acceptable and should not affect the score, as long as the group is properly framed and visible.
+
+3. Creativity and Editing: Encourage creative effort. Do not penalize students for simple editing or limited transitions. Focus on how their ideas and constructions are presented and narrated.
+
+4. Range of Scores: Use the full scoring scale, from the minimum to the maximum, to reflect genuine differences in performance and content. Avoid clustering all scores in the middle.
+
+5. Specific Feedback: Provide clear, detailed comments that refer to specific moments or aspects of each video. Avoid generic remarks such as “good job” or “could be better.” Instead, identify strengths and offer concrete suggestions for improvement.
+
+6. Objective and Supportive Tone: Write in the third person, addressing the group as “the students” or “the team.” Feedback should be encouraging and constructive, never condescending.
+
+7. Focus Areas:
+• Content:Assess how well the students explain what they built and why, linking it to the challenge requirements.  
+• Teamwork and Roles: Observe how participation is distributed and whether each student contributes clearly to the presentation.  
+• Visual Presentation: Consider how effectively the Minecraft constructions are shown and whether they align with what is being explained.  
+• Oral Expression: Evaluate clarity of speech, fluency, enthusiasm, and expressiveness.  
+• Technical Aspects: Consider video and audio quality only insofar as they help or hinder understanding. Do not be overly strict about production quality, but do mention if simple improvements could make the video clearer.
+
+Sample Feedback:
+
+The students present their Minecraft world with enthusiasm, clearly describing the Palacio Legislativo and Peñarol scenes. Each member of the team speaks and explains part of the work, showing good coordination. The use of signs and in-game dialogue to support the narrative was effective. The video is easy to follow, although in some parts the microphone was too far, which made it harder to hear. To improve, they could speak a little more slowly or zoom in more on specific elements they are describing.
+
+Remember to always write all the text values in Spanish only and keep the JSON output schema defined above in the metrics and Output format section.
+
+"""
